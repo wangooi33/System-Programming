@@ -1,3 +1,5 @@
+//注意：匿名管道虽然可以在具有亲缘关系的进程中使用，
+//但是匿名管道是不保证数据的原子性。
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>

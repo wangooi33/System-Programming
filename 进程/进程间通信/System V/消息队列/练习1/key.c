@@ -1,0 +1,26 @@
+#include <stdio.h>
+int main(int argc,char *argv[])
+{
+    //1.创建一个消息队列
+    key_t key = ftok(".",0xFFFFFF01);//proj_id只使用低8bit  0x01
+    int msg_id = msgget(key,IPC_CREAT);
+    if(msg_id == -1)
+    {
+        fprintf (stderr, "msgget error %d, %s\n",
+                 errno, strerror (errno));
+
+        exit(1);
+    }
+    //2.输出创建成功的消息队列的key
+    printf("msg key = %#x\n",key);
+    //3.可以选择验证key的生成算法  
+    //    project_id(8bit) + device_number(8bit) + inode_number(16bit)
+    struct stat file_stat;
+    stat(".",&file_stat);
+
+    printf("%#lx\n",file_stat.st_dev); //输出文件的设备编号
+    printf("%#lx\n",file_stat.st_ino); //输出文件的文件编号
+    printf("0xFFFFFF01\n");
+
+    return 0;
+}

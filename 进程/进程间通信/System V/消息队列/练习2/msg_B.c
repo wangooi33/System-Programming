@@ -1,0 +1,52 @@
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/wait.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <time.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+
+//用户可以构造消息的结构  struct msgbuf
+struct msgbuf
+{
+	long mtype;  //消息类型，必须大于0
+	int  mtext;  //消息正文
+};
+
+int main(int argc, char const *argv[])
+{
+	//1.打开一个消息队列
+	key_t key  = ftok(".", 0xFFFFFF01);
+	int msg_id = msgget(key,0644);
+	if (msg_id == -1)
+	{
+		fprintf(stderr, "msgget error,errno:%d,%s\n", errno,strerror(errno));
+	}
+
+	//2.从消息队列接收消息
+	struct msgbuf first;
+	bzero(&first,sizeof(first));
+
+	msgrcv(msg_id,&first,4,0,0); //默认阻塞
+
+	printf("mtype = %d\n",first.mtype); //1
+	printf("mtext = %d\n",first.mtext); // pid不会是3649，应该比3649小
+
+	// msgrcv(msg_id,&first,4,0,0); //默认阻塞
+
+	// printf("mtype = %d\n",first.mtype); //1
+	// printf("mtext = %d\n",first.mtext); // pid不会是3649，应该比3649小
+	
+	return 0;
+}
