@@ -1,3 +1,9 @@
+/*
+ *注意：消息队列默认的属性是阻塞的，
+ *也就是当待写入的消息的长度大于消息队列剩余空间时，默认阻塞，
+ *直到消息队列的容量足够容纳时会解除阻塞。
+*/
+
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -39,7 +45,7 @@ int main(int argc, char const *argv[])
 	first.mtype = 1;
 	first.mtext = getpid();
 
-	msgsnd(msg_id,&first,4,0); //默认阻塞
+	msgsnd(msg_id,&first,4,0); //默认阻塞,将第4个参数设置为IPC_NOWAIT则表示不阻塞
 
 	while(1);
 

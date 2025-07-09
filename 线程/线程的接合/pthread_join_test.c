@@ -1,12 +1,12 @@
+//其他线程可使用 pthread_join() 来释放僵尸线程的资源，并可获得其退出时返回的退出值
+
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
-
 pthread_t main_thread; //存储主线程ID
-
 
 //线程的任务
 void * task(void *arg)

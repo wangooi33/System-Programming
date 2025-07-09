@@ -1,14 +1,23 @@
+//某些线程只是为了获取共享资源的值，而不打算修改共享资源(读写锁)
+//读操作可以共享，因此多条线程可以对同一个读写锁加多重读锁。
+//写操作天然互斥，因此多条线程中只能有一条线程拥有写锁。
+
+
+//注意：如果有一条线程准备对资源进行修改，则不应该有其他的线程再对资源进行读或者写，就相当于写操作和读操作是互斥的。
+//不能同时进行读写操作
 #include <stdio.h>
 #include <pthread.h>
 #include <unistd.h>
-
 
 //临界资源,应该使用volatile进行修饰，防止编译器对该变量进行优化
 volatile int data = 10;  
 
 //读写锁对象，必须是全局变量
 pthread_rwlock_t rwlock = PTHREAD_RWLOCK_INITIALIZER;
-
+/*
+ * pthread_rwlock_t rwlock;
+ * pthread_rwlock_init(&rwlock, NULL);
+*/
 
 
 //子线程B的任务,格式是固定的

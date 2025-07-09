@@ -13,14 +13,15 @@
 	// 	sem_id = semget(ftok(".",20),1,0644);
 	// }
 
-	// 信号量初始化值
-
+	
+// 信号量初始化值
 #define SEM_INIT_VALUE 1
 // 自定义union semun（POSIX要求用户自行定义）
-union semun {
-    int val;                  // 用于SETVAL
-    struct semid_ds *buf;     // 用于IPC_STAT, IPC_SET
-    unsigned short *array;    // 用于GETALL, SETALL
+union semun 
+{
+    int val;                  // 用于SETVAL:设置某个信号量的初始值
+    struct semid_ds *buf;     // 用于IPC_STAT, IPC_SET:获取信号量集合的状态或者设置权限
+    unsigned short *array;    // 用于GETALL, SETALL:批量获取/设置信号量集合中所有信号量的值
 };
 int main(int argc,char *argv[]) 
 {

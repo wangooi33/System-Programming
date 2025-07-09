@@ -48,7 +48,6 @@ int main(int argc, char const *argv[])
 
 
 	//3.进入死循环，主线程需要对临界资源进行修改
-	
 
 	//通过键盘获取字符串并输入到数组中
 	scanf("%s",buf);

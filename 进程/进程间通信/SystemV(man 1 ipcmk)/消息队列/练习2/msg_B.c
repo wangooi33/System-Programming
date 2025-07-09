@@ -34,6 +34,10 @@ int main(int argc, char const *argv[])
 		fprintf(stderr, "msgget error,errno:%d,%s\n", errno,strerror(errno));
 	}
 
+	/*如果要接收2个字节，但实际上有4个字节，
+	 *如果第3个参数不填MSG_NOERROR则不接收，
+	 *填了的话只接收2字节
+	*/
 	//2.从消息队列接收消息
 	struct msgbuf first;
 	bzero(&first,sizeof(first));

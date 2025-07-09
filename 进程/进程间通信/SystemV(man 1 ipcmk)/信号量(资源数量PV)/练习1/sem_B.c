@@ -1,3 +1,8 @@
+/*注意：进行P操作时，
+ *如果信号量的值小于要申请的数量，则会导致进程阻塞，
+ *进行V操作时永远不会阻塞。
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/ipc.h>
@@ -5,11 +10,18 @@
 #include <string.h>
 #include <errno.h>
 
-// struct sembuf{
-//     unsigned short sem_num;  /* semaphore number */
-//     short          sem_op;   /* semaphore operation */
-//     short          sem_flg;  /* operation flags */
-//  };
+/*
+ *int semop(int semid, struct sembuf *sops(结构体成员如下), size_t nsops);
+ *
+ *struct sembuf
+ *{
+ *	unsigned short sem_num;  //semaphore number，信号量序号（下标）
+ *	short          sem_op;   // semaphore operation，负数则为P操作，正数则为V操作
+ *	short          sem_flg;  // operation flags，标志位（阻塞等...）
+ *};
+ * 
+*/ 
+	
 int main(int argc, char const *argv[])
 {
     //0.打开信号量集，如果不存在则创建，如果存在则打开

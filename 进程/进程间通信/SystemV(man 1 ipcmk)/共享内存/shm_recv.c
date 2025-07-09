@@ -32,7 +32,7 @@ int main(int argc, char const *argv[])
 	}
 
 	//2.对共享内存段的参数进行优化，比如修改共享内存段的大小
-	struct shmid_ds shm_ds;
+	struct shmid_ds shm_ds;//记录共享内存的属性和信息
 	shmctl(shm_id,IPC_STAT,&shm_ds);
 
 	printf("shm_segsz = %d\n", shm_ds.shm_segsz); //256

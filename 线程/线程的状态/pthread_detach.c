@@ -1,3 +1,4 @@
+//在线程创建好之后强制设置为分离属性
 
 #include <stdio.h>
 #include <pthread.h>

@@ -1,3 +1,4 @@
+//打开一个用于读取的FIFO通常会阻塞，直到其他进程打开相同的FIFO进行写入
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -7,6 +8,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+
+/*
+ *命名管道（FIFO）是 内核中临时创建的内存缓冲区，它的特点是：
+ *它不具有持久性：一旦两端（写端和读端）都关闭，内核会清除其中的所有缓存数据；
+ *
+ *
+*/
 
 int main(int argc, char const *argv[])
 {

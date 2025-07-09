@@ -1,3 +1,8 @@
+//man 3 pthread_
+
+
+//TID：线程ID
+
 #include <stdio.h>
 #include <pthread.h>
 #include <errno.h>
@@ -31,6 +36,7 @@ void ts_getval(int ts_fd,int *ts_x,int *ts_y)
         }
     }
 }
+
 void *ts_tack(void *arg)
 {
     int ts_x,ts_y;//存储触摸屏的坐标
@@ -47,6 +53,7 @@ void *ts_tack(void *arg)
         y=ts_y;
     }
 }
+
 int main(int argc.char *argv[])
 {
     //1.open
@@ -60,7 +67,7 @@ int main(int argc.char *argv[])
     }
     //2.创建子线程，，线程一旦创建则马上开始工作
     pthread_t ts_thread;
-    pthread_creat(&ts_thread,NULL,ts_task,(void *)&ts_fd);
+    pthread_creat(&ts_thread,NULL,ts_task,(void *)&ts_fd);//&ts_fd 等价于 *ts_fd , 然后进行强转，转换成(void *)
 
     while(1)
     {
