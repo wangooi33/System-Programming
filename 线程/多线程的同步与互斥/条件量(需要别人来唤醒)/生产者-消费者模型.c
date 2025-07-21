@@ -3,8 +3,8 @@
 #include <unistd.h>
 
 int ready = 0;
-pthread_mutex_t lock;
-pthread_cond_t cond;
+pthread_mutex_t lock;//互斥锁
+pthread_cond_t cond;//条件量
 
 void* consumer(void* arg) 
 {

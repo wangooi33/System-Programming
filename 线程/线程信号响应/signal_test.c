@@ -1,3 +1,9 @@
+/*
+ * pthread_kill()的函数接口，用户利用该接口可以向指定的线程发送信号。
+ *
+ * 如果用户打算给某条线程发送信号的同时还想要发送一个额外的数据，Linux系统提供了一个名称叫做pthread_sigqueue()的函数接口可以实现该功能。
+ * 
+*/
 
 
 #include <stdio.h>
@@ -31,7 +37,7 @@ void *task1(void *arg)
 void *task2(void *arg)
 {
 	sigaddset(&set,SIGINT);
-	sigprocmask(SIG_BLOCK,&set,NULL);
+	sigprocmask(SIG_BLOCK,&set,NULL);//信号的屏蔽
 
 	while(1)
 	{	

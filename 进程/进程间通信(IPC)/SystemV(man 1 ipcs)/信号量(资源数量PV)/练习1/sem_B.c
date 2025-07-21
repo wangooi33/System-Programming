@@ -16,7 +16,7 @@
  *struct sembuf
  *{
  *	unsigned short sem_num;  //semaphore number，信号量序号（下标）
- *	short          sem_op;   // semaphore operation，负数则为P操作，正数则为V操作
+ *	short          sem_op;   // semaphore operation，负数则为P操作。正数则为V操作。若等于0，进行“等待0”操作，如果semval值为0，则操作可以立即执行
  *	short          sem_flg;  // operation flags，标志位（阻塞等...）
  *};
  * 

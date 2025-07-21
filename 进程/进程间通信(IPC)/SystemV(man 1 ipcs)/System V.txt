@@ -1,0 +1,10 @@
+key键值的创建：ftok
+
+消息队列：
+msgget,msgsnd,msgrcv,msgctl
+
+共享内存：
+shmget,shmat（映射），shmdt（解除映射）,shmctl
+
+信号量：
+semget,semop（PV）,semctl

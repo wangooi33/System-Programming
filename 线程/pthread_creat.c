@@ -1,5 +1,8 @@
-//man 3 pthread_
+//并发：同一时间（时间段）
+//并行：同一时刻
 
+//man 3 pthread_
+//编译时加上  -pthread
 
 //TID：线程ID
 

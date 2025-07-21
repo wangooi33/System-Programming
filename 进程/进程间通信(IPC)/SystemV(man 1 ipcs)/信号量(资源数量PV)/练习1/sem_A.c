@@ -1,3 +1,12 @@
+/*
+ * 由于多个进程都会对这段共享内存进行映射，并且映射之后这些进程可能会同时对共享内存进行读写访问，
+ * 所以就会导致存储在共享内存中的数据被其他进程修改，造成进程间的异常，
+ * 所以使用信号量来实现进程间资源协同的目的。
+*/
+
+//被进程或者线程共同访问资源称为临界资源（Critical Resources），
+//而程序中访问这些临界资源的代码段被称为临界区（Critical Zone）。
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/ipc.h>
@@ -32,7 +41,7 @@ int main(int argc,char *argv[])
         exit(1);
     }
 
-    // 2. 创建一个包含1个信号量的信号量集
+    // 2. 创建一个包含1个信号量（信号量元素数量）的信号量集
     int semid = semget(key, 1, IPC_CREAT | IPC_EXCL | 0666);
     if (semid == -1) {
         fprintf(stderr, "semget error %d, %s\n", errno, strerror(errno));

@@ -1,7 +1,11 @@
 #include <stdio.h>
+
+//shell命令创建，ipcmk -Q		man 1 ipcmk
+
 int main(int argc,char *argv[])
 {
     //1.创建一个消息队列
+	//key：组成句柄的必要材料
     key_t key = ftok(".",0xFFFFFF01);//proj_id只使用低8bit  0x01，必须是非0
     int msg_id = msgget(key,IPC_CREAT);
     if(msg_id == -1)

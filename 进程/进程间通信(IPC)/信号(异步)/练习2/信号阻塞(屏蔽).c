@@ -18,10 +18,11 @@ int main(int argc, char const *argv[])
 	sigset_t set;
 
 	//2.把需要屏蔽的信号加入到该集合中
-	sigaddset(&set,SIGINT);
+	sigaddset(&set,SIGINT);//ctrl+c
 
 	//3.需要设置该集合的属性  阻塞属性
 	sigprocmask(SIG_BLOCK,&set,NULL);
+	//解除: sigprocmask(SIG_UNBLOCK, &set, NULL);
 	
 	while(1);
 

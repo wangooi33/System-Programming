@@ -17,7 +17,7 @@ void * task(void *arg)
 	while(1)
 	{
 		//子线程等待主线程终止并输出主线程的终止状态，如果等待接合的线程未终止，则该函数会阻塞
-		pthread_join(main_thread,(void **)&exit_status);
+		pthread_join(main_thread,(void **)&exit_status);//强转成(void **)   二级指针
 		printf("main thread exit status code = %d\n",*exit_status);
 		pthread_exit(NULL);
 	}
